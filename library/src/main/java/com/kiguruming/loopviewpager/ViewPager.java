@@ -114,7 +114,7 @@ public class ViewPager extends ViewGroup {
      * Used to track what the expected number of items in the adapter should be.
      * If the app changes this when we don't expect it, we'll throw a big obnoxious exception.
      */
-    private int mExpectedAdapterCount;
+    int mExpectedAdapterCount;
 
     static class ItemInfo {
         Object object;
@@ -138,20 +138,20 @@ public class ViewPager extends ViewGroup {
         }
     };
 
-    private final ArrayList<ItemInfo> mItems = new ArrayList<ItemInfo>();
+    final ArrayList<ItemInfo> mItems = new ArrayList<ItemInfo>();
     private final ItemInfo mTempItem = new ItemInfo();
 
     private final Rect mTempRect = new Rect();
 
-    private PagerAdapter mAdapter;
-    private int mCurItem;   // Index of currently displayed page.
+    PagerAdapter mAdapter;
+    int mCurItem;   // Index of currently displayed page.
     private int mRestoredCurItem = -1;
     private Parcelable mRestoredAdapterState = null;
     private ClassLoader mRestoredClassLoader = null;
     private Scroller mScroller;
     private PagerObserver mObserver;
 
-    private int mPageMargin;
+    int mPageMargin;
     private Drawable mMarginDrawable;
     private int mTopPageBounds;
     private int mBottomPageBounds;
@@ -159,8 +159,8 @@ public class ViewPager extends ViewGroup {
     // Offsets of the first and last items, if known.
     // Set during population, used to determine if we are at the beginning
     // or end of the pager data set during touch scrolling.
-    private float mFirstOffset = -Float.MAX_VALUE;
-    private float mLastOffset = Float.MAX_VALUE;
+    float mFirstOffset = -Float.MAX_VALUE;
+    float mLastOffset = Float.MAX_VALUE;
 
     private int mChildWidthMeasureSpec;
     private int mChildHeightMeasureSpec;
@@ -168,8 +168,8 @@ public class ViewPager extends ViewGroup {
 
     private boolean mScrollingCacheEnabled;
 
-    private boolean mPopulatePending;
-    private int mOffscreenPageLimit = DEFAULT_OFFSCREEN_PAGES;
+    boolean mPopulatePending;
+    int mOffscreenPageLimit = DEFAULT_OFFSCREEN_PAGES;
 
     private boolean mIsBeingDragged;
     private boolean mIsUnableToDrag;
@@ -215,13 +215,13 @@ public class ViewPager extends ViewGroup {
     private EdgeEffectCompat mLeftEdge;
     private EdgeEffectCompat mRightEdge;
 
-    private boolean mFirstLayout = true;
-    private boolean mNeedCalculatePageOffsets = false;
+    boolean mFirstLayout = true;
+    boolean mNeedCalculatePageOffsets = false;
     private boolean mCalledSuper;
     private int mDecorChildCount;
 
-    private OnPageChangeListener mOnPageChangeListener;
-    private OnPageChangeListener mInternalPageChangeListener;
+    OnPageChangeListener mOnPageChangeListener;
+    OnPageChangeListener mInternalPageChangeListener;
     private OnAdapterChangeListener mAdapterChangeListener;
     private PageTransformer mPageTransformer;
     private Method mSetChildrenDrawingOrderEnabled;
@@ -485,7 +485,7 @@ public class ViewPager extends ViewGroup {
         mAdapterChangeListener = listener;
     }
 
-    private int getClientWidth() {
+    int getClientWidth() {
         return getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
     }
 
@@ -563,8 +563,8 @@ public class ViewPager extends ViewGroup {
         }
     }
 
-    private void scrollToItem(int item, boolean smoothScroll, int velocity,
-            boolean dispatchSelected) {
+    void scrollToItem(int item, boolean smoothScroll, int velocity,
+                      boolean dispatchSelected) {
         final ItemInfo curInfo = infoForPosition(item);
         int destX = 0;
         if (curInfo != null) {
@@ -1113,7 +1113,7 @@ public class ViewPager extends ViewGroup {
         }
     }
 
-    private void sortChildDrawingOrder() {
+    void sortChildDrawingOrder() {
         if (mDrawingOrder != DRAW_ORDER_DEFAULT) {
             if (mDrawingOrderedChildren == null) {
                 mDrawingOrderedChildren = new ArrayList<View>();
@@ -1129,7 +1129,7 @@ public class ViewPager extends ViewGroup {
         }
     }
 
-    private void calculatePageOffsets(ItemInfo curItem, int curIndex, ItemInfo oldCurInfo) {
+    void calculatePageOffsets(ItemInfo curItem, int curIndex, ItemInfo oldCurInfo) {
         final int N = mAdapter.getCount();
         final int width = getClientWidth();
         final float marginOffset = width > 0 ? (float) mPageMargin / width : 0;
@@ -2416,7 +2416,7 @@ public class ViewPager extends ViewGroup {
         }
     }
 
-    private void setScrollingCacheEnabled(boolean enabled) {
+    void setScrollingCacheEnabled(boolean enabled) {
         if (mScrollingCacheEnabled != enabled) {
             mScrollingCacheEnabled = enabled;
             if (USE_CACHE) {
