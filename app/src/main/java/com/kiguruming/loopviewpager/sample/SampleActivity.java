@@ -1,5 +1,7 @@
 package com.kiguruming.loopviewpager.sample;
 
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.kiguruming.loopviewpager.LoopViewPager;
+
 
 public class SampleActivity extends ActionBarActivity {
 
@@ -16,11 +20,10 @@ public class SampleActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+
+        LoopViewPager viewPager = (LoopViewPager) findViewById(R.id.fragmanet_pager);
+        PagerAdapter adapter = new SampleFragmentPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
     }
 
 
@@ -55,6 +58,8 @@ public class SampleActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_sample, container, false);
+
+
             return rootView;
         }
     }
